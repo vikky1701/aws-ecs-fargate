@@ -20,7 +20,7 @@ jobs:
 
     - name: Build and Push Docker image
       run: |
-        docker build -t vikky17/medusa:latest ./pearlthoughts-project
+        docker build -t vikky17/medusa:latest .
         docker push vikky17/medusa:latest
 
     - name: Setup Terraform
@@ -28,12 +28,12 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: ./pearlthoughts-project/terraform
+      working-directory: ./terraform
 
     - name: Terraform Plan
       run: terraform plan -var="image_url=vikky17/medusa:latest"
-      working-directory: ./pearlthoughts-project/terraform
+      working-directory: ./terraform
 
     - name: Terraform Apply
       run: terraform apply -auto-approve -var="image_url=vikky17/medusa:latest"
-      working-directory: ./pearlthoughts-project/terraform
+      working-directory: ./terraform
